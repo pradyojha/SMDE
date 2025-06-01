@@ -1,9 +1,7 @@
 package hub.experiment.strategy;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -34,11 +32,17 @@ public class Main {
     System.out.println("map of time interval and marketStreamDataEntity creation is complete.");
     
     //Create a Strategy
-    TradingStrategy tradingStrategy = new TradingStrategy(0.6,0.6);
-    System.out.println("Strategy creation is complete.");
+    //TradingStrategy tradingStrategy = new TradingStrategy(0.6,0.6);
+    //System.out.println("Strategy creation is complete.");
 
     //Provide input for INPUT BUY and SELL Price
+    /*but till some time defined, also add condition to see the shares bought at higher price with certain amount of high price
+    * This should be allowed till certain time of the day, buy upto 3 o clock, then afterwards sell when 15 mins will allow price going higher*/
     double entryBuyPrice = 411.00;
+
+    /*Advance Sell  first if the market price is going higer and plan to see these many later at lower price,
+    this agin should be allowed till certain period of time, sell advance can occur at any time at the beginning of the day
+    but the corresponding buy has to happen at lower price in the same day before market closes.*/
     double entrySellPrice = 416.00;
 
     //provide the quantities to buy
@@ -48,7 +52,7 @@ public class Main {
     AtomicBoolean sellOrderIsPlaced = new AtomicBoolean(false);
 
     //Order Placement Initialization
-    OrderPlacement orderPlacement = new OrderPlacement(mapTimeMarketStreamData,tradingStrategy);
+    OrderPlacement orderPlacement = new OrderPlacement(mapTimeMarketStreamData);
     System.out.println("orderPlacement instance creation is complete.");
 
     //iterate over the collection
@@ -70,6 +74,7 @@ public class Main {
         Integer simulatedTradeTime = tradeTime ; //later can add delay to test
         orderPlacement.sellStocks(simulatedTradeTime, quantityToSell,entrySellPrice,marketStreamDataEntity.getStockName());
         sellOrderIsPlaced.set(true);
+        
 
       }
     });

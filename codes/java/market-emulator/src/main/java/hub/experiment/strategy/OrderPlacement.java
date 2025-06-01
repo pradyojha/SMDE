@@ -1,17 +1,18 @@
 package hub.experiment.strategy;
 
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+
+
+
 public class OrderPlacement {
   private TreeMap<Integer,MarketStreamDataEntity> mapTimeMarketStreamData;
-  private TradingStrategy tradingStrategy;
+  //private TradingStrategy tradingStrategy;
 
-  public OrderPlacement(TreeMap<Integer,MarketStreamDataEntity> mapTimeMarketStreamData,
-      TradingStrategy tradingStrategy){
+  public OrderPlacement(TreeMap<Integer,MarketStreamDataEntity> mapTimeMarketStreamData){
     this.mapTimeMarketStreamData = mapTimeMarketStreamData;
-    this.tradingStrategy = tradingStrategy;
+    //this.tradingStrategy = tradingStrategy;
   }
 
   public boolean buyStocks(int orderPlacedTime, int quantity, double buyTargetPrice, String stockName){
